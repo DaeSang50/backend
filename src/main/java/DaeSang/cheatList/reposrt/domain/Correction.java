@@ -33,4 +33,7 @@ public class Correction {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    public void setCreatedAt(LocalDateTime now) {
+        this.createdAt = now;
+    }
 }

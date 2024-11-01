@@ -2,11 +2,13 @@ package DaeSang.cheatList.reposrt.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "VICTIM")
 public class Victim {
 

@@ -36,5 +36,32 @@ public class Suspect {
         MALE, FEMALE, OTHER
     }
 
+    public void setSuspectId(Long suspectId) {
+        this.suspectId = suspectId;
+    }
+
+    public void setSuspectName(String suspectName) {
+        this.suspectName = suspectName;
+    }
+
+    public void setSuspectPhone(String suspectPhone) {
+        this.suspectPhone = suspectPhone;
+    }
+
+    public void setSuspectGender(Gender suspectGender) {
+        this.suspectGender = suspectGender;
+    }
+
+    public void setSuspectInfo(String suspectInfo) {
+        this.suspectInfo = suspectInfo;
+    }
+
+    public void setKnow(Boolean know) {
+        this.know = know;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
 

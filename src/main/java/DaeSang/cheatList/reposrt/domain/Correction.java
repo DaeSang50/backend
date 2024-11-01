@@ -2,6 +2,7 @@ package DaeSang.cheatList.reposrt.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -30,10 +31,8 @@ public class Correction {
     @Column(name = "reason")
     private String reason;
 
+    @Setter
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public void setCreatedAt(LocalDateTime now) {
-        this.createdAt = now;
-    }
 }

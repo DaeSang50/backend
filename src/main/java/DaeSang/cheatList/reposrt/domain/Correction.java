@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "CORRECTION")
 public class Correction {
@@ -30,6 +31,12 @@ public class Correction {
 
     @Column(name = "reason")
     private String reason;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "detail_address")
+    private String detailAddress;
 
     @Setter
     @Column(name = "created_at")

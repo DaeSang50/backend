@@ -16,14 +16,14 @@ public class SuspectAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long suspectAccountId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "suspect_id")
     private Suspect suspect;
 
-    @Column(name = "bank_name", length = 20)
+    @Column(name = "bank_name", length = 100)
     private String bankName;
 
-    @Column(name = "account_num", length = 30)
+    @Column(name = "account_num", length = 100)
     private String accountNum;
 
     private Boolean know;

@@ -16,13 +16,13 @@ public class Victim {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long victimId;
 
-    @Column(name = "victim_name", length = 20)
+    @Column(name = "victim_name", length = 100)
     private String victimName;
 
-    @Column(name = "victim_phone", length = 20)
+    @Column(name = "victim_phone", length = 100)
     private String victimPhone;
 
-    @Column(name = "victim_email", length = 50)
+    @Column(name = "victim_email", length = 100)
     private String victimEmail;
 
     @Column(name = "created_at")

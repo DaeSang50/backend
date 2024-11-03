@@ -16,11 +16,11 @@ public class DamageCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long caseId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "suspect_id")
     private Suspect suspect;
 
-    @Column(name = "deposit", length = 20)
+    @Column(name = "deposit", length = 100)
     private String deposit;
 
     @Column(name = "address", length = 100)
@@ -35,20 +35,19 @@ public class DamageCase {
     @Column(name = "deposit_date")
     private LocalDate depositDate;
 
-    @Column(name = "summary")
+    @Column(name = "summary", length = 100)
     private String summary;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "suspect_account_id")
     private SuspectAccount suspectAccount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "victim_id")
     private Victim victim;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "victim_account_id")
     private VictimAccount victimAccount;
 
-    // Getters and Setters
 }

@@ -3,11 +3,14 @@ package DaeSang.cheatList.reposrt.service;
 import DaeSang.cheatList.reposrt.domain.*;
 import DaeSang.cheatList.reposrt.repository.*;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+
 @Transactional
 public class ReportService {
 
@@ -17,50 +20,61 @@ public class ReportService {
     private final VictimAccountRepository victimAccountRepository;
     private final DamageCaseRepository damageCaseRepository;
 
-    public Report saveReport(Report report) {
+    @Autowired
+    protected EncryptData encryptData;
+
+
+
+    public Report saveReport(Report report) throws Exception {
+
         // Suspect 저장
         Suspect suspect = new Suspect();
-        suspect.setSuspectName(report.getSuspectName());
-        suspect.setSuspectPhone(report.getSuspectPhone());
-        suspect.setSuspectGender(Suspect.Gender.valueOf(String.valueOf(report.getSuspectGender()))); // Enum 변환
-        suspect.setSuspectInfo(report.getSuspectInfo());
-        suspect.setKnow(report.isKnow());
-        suspectRepository.save(suspect);
+        Suspect encryptSuspect = new Suspect();
+        encryptSuspect.setSuspectName(encryptData.encrypt(report.getSuspectName()));
+        encryptSuspect.setSuspectPhone(encryptData.encrypt(report.getSuspectPhone()));
+        encryptSuspect.setSuspectGender(Suspect.Gender.valueOf(String.valueOf(report.getSuspectGender()))); // Enum 변환
+        encryptSuspect.setSuspectInfo(encryptData.encrypt(report.getSuspectInfo()));
+        encryptSuspect.setKnow(report.isKnow());
+        suspectRepository.save(encryptSuspect);
 
         // SuspectAccount 저장
         SuspectAccount suspectAccount = new SuspectAccount();
-        suspectAccount.setSuspect(suspect);
-        suspectAccount.setAccountNum(report.getSuspectAccountNum());
-        suspectAccount.setBankName(report.getSuspectBankName());
-        suspectAccountRepository.save(suspectAccount);
+        SuspectAccount encryptSuspectAccount = new SuspectAccount();
+        encryptSuspectAccount.setSuspect(suspect);
+        encryptSuspectAccount.setAccountNum(encryptData.encrypt(report.getSuspectAccountNum()));
+        encryptSuspectAccount.setBankName(encryptData.encrypt(report.getSuspectBankName()));
+        suspectAccountRepository.save(encryptSuspectAccount);
 
         // Victim 저장
         Victim victim = new Victim();
-        victim.setVictimName(report.getVictimName());
-        victim.setVictimPhone(report.getVictimPhone());
-        victim.setVictimEmail(report.getVictimEmail());
-        victimRepository.save(victim);
+        Victim encryptVictim = new Victim();
+        encryptVictim.setVictimName(encryptData.encrypt(report.getVictimName()));
+        encryptVictim.setVictimPhone(encryptData.encrypt(report.getVictimPhone()));
+        encryptVictim.setVictimEmail(encryptData.encrypt(report.getVictimEmail()));
+        victimRepository.save(encryptVictim);
 
         // VictimAccount 저장
         VictimAccount victimAccount = new VictimAccount();
-        victimAccount.setVictim(victim);
-        victimAccount.setAccountNum(report.getVictimAccountNum());
-        victimAccount.setBankName(report.getVictimBankName());
-        victimAccountRepository.save(victimAccount);
+        VictimAccount encryptVictimAccount = new VictimAccount();
+        encryptVictimAccount.setVictim(victim);
+        encryptVictimAccount.setAccountNum(encryptData.encrypt(report.getVictimAccountNum()));
+        encryptVictimAccount.setBankName(encryptData.encrypt(report.getVictimBankName()));
+        victimAccountRepository.save(encryptVictimAccount);
 
         // DamageCase 저장
         DamageCase damageCase = new DamageCase();
-        damageCase.setSuspect(suspect);
-        damageCase.setVictim(victim);
-        damageCase.setDeposit(report.getDeposit());
-        damageCase.setDepositDate(report.getDepositDate());
-        damageCase.setAddress(report.getAddress());
-        damageCase.setDetailAddress(report.getDetailAddress());
-        damageCase.setUrl(report.getUrl());
-        damageCase.setSummary(report.getSummary());
-        damageCase.setSuspectAccount(suspectAccount);
-        damageCase.setVictimAccount(victimAccount);
-        damageCaseRepository.save(damageCase);
+        DamageCase encryptDamageCase = new DamageCase();
+        encryptDamageCase.setSuspect(suspect);
+        encryptDamageCase.setVictim(victim);
+        encryptDamageCase.setDeposit(encryptData.encrypt(report.getDeposit()));
+        encryptDamageCase.setDepositDate(report.getDepositDate());
+        encryptDamageCase.setAddress(encryptData.encrypt(report.getAddress()));
+        encryptDamageCase.setDetailAddress(encryptData.encrypt(report.getDetailAddress()));
+        encryptDamageCase.setUrl(encryptData.encrypt(report.getUrl()));
+        encryptDamageCase.setSummary(encryptData.encrypt(report.getSummary()));
+        encryptDamageCase.setSuspectAccount(suspectAccount);
+        encryptDamageCase.setVictimAccount(victimAccount);
+        damageCaseRepository.save(encryptDamageCase);
         return report;
     }
 }

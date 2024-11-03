@@ -16,14 +16,14 @@ public class VictimAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long victimAccountId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "victim_id")
     private Victim victim;
 
-    @Column(name = "bank_name", length = 20)
+    @Column(name = "bank_name", length = 100)
     private String bankName;
 
-    @Column(name = "account_num", length = 30)
+    @Column(name = "account_num", length = 100)
     private String accountNum;
 
     @Column(name = "created_at")

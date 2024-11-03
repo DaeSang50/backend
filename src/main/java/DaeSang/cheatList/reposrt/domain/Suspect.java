@@ -14,17 +14,17 @@ public class Suspect {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long suspectId;
 
-    @Column(name = "suspect_name", length = 20)
+    @Column(name = "suspect_name", length = 100)
     private String suspectName;
 
-    @Column(name = "suspect_phone", length = 20)
+    @Column(name = "suspect_phone", length = 100)
     private String suspectPhone;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "suspect_gender")
     private Gender suspectGender;
 
-    @Column(name = "suspect_info")
+    @Column(name = "suspect_info", columnDefinition = "TEXT")
     private String suspectInfo;
 
     private Boolean know;
